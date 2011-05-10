@@ -1,3 +1,10 @@
+-- Save this as an App and use it when creating keynotes
+-- It will save your presentations every N minutes.
+-- Don't set it to low because saving takes a few seconds
+-- and the app actually blocks while doing it.
+
+-- Carlos Fonseca
+
 property minutesBetweenSaves : 10
 
 on run
