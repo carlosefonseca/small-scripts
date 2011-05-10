@@ -3,13 +3,13 @@
 # Extracts the most important information about each cache on a GPX file.
 # It can output as text, with limited text size for each column or
 # as a CSV with columns separated by ';' and without limits of the text size
-# It is advisable to manually process the gchint text if it has more than a \
+# It is advisable to manually process the gchint text if it has more than a
 # language or useless text
 
 # by Carlos Fonseca on 2011-04-30
 
-# USAGE:     python gpx.py GPXfile
-#    or      python gpx.py -csv GPXfile > file.csv
+# USAGE:     python gpx.py file.gpx
+#    or      python gpx.py -csv file.gpx > file.csv
 
 # This Python file uses the following encoding: utf-8
 from xml.etree.ElementTree import ElementTree
