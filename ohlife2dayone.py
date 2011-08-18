@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# By Carlos Fonseca
+# 2011-08-17
+
+# Import OfLife's entries into Day One.
+
+
+
 from datetime import datetime
 import os, sys
 
