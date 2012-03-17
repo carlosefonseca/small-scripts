@@ -1,13 +1,35 @@
 #!/usr/bin/env sh
 
-# This file is intended to be used by Hazel.
-# It takes an avi movie and passes it to HandBrake
-# with a specific output folder.
+#EXECS
+echo $s
+RENAME="/Users/carlos/Code/tvrenamer.pl --scheme=XxYY --dubious --include-series --unattended --chdir='$s'"
+HandBrakeCLI="/Users/carlos/Dropbox/Code/small-scripts/Video/HandBrakeCLI"
 
-# Carlos Fonseca
-# carlosefonseca@gmail.com
-# 2011-04-30
+#PATHS
+iTUNES="/Users/carlos/Music/iTunes/iTunes Media/Automatically Add to iTunes.localized/"
+CONVERT="/Users/carlos/Movies/MP4"
 
-FILE=`basename -s .avi "$1"`.mp4
-OUT="/Users/carlos/Downloads/MP4/$FILE"
-nice -n +100 HandBrakeCLI -i "$1" -o "$OUT" --preset="iPhone & iPod Touch"
+DIR=`dirname "$1"`
+
+
+if [ ! -e "$1" ]; then
+    echo "File doesn't exist."
+    exit
+fi
+
+if [ ! -d "$CONVERT" ]; then
+	mkdir $CONVERT
+fi
+INOD=`stat -f %i "$1"`
+
+s=`echo $1 | perl -lane '$v="@F[0..20]"; $v=~m/(\/([^\/]+\/)+)/g; print \$1'`
+/Users/carlos/Code/tvrenamer.pl --scheme=XxYY --dubious --include-series --unattended --chdir="$s"
+
+NEWFILE=`find "$DIR" -inum $INOD -print`
+F=$NEWFILE
+
+FILE=`basename -s .avi "$F"`.m4v
+OUT="$CONVERT/$FILE"
+echo "Converting \"$F\" to \"$OUT\""
+nice -n +100 $HandBrakeCLI -i "$F" -o "$OUT" --preset="iPhone & iPod Touch"
+mv "$OUT" "$iTUNES"
